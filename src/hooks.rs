@@ -1,6 +1,6 @@
-use crate::{AtomId, AtomRoot, Readable, Writable};
+use crate::{AtomId, AtomRef, AtomRoot, Readable, Writable};
 use dioxus::core::{ScopeId, ScopeState};
-use std::{marker::PhantomData, rc::Rc};
+use std::{cell::RefCell, marker::PhantomData, rc::Rc};
 
 // Initializes the atom root and retuns it;
 pub fn use_init_atom_root(cx: &ScopeState) -> &Rc<AtomRoot> {
@@ -104,4 +104,16 @@ pub fn use_set<'a, T: 'static>(cx: &'a ScopeState, f: impl Writable<T>) -> &'a R
 struct UseSetInner<T> {
     _root: Rc<AtomRoot>,
     setter: Rc<dyn Fn(T)>,
+}
+
+pub fn use_atom_ref<T: 'static>(cx: &ScopeState, atom: AtomRef<T>) -> &UseAtomRef<T> {
+    let root = use_atom_root(cx);
+    cx.use_hook(|_| {
+        let root = root.clone();
+        UseAtomRef { value: todo!() }
+    })
+}
+
+pub struct UseAtomRef<T> {
+    value: Rc<RefCell<T>>,
 }

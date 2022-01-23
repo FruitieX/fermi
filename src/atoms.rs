@@ -1,6 +1,7 @@
 use im_rc::HashMap as ImMap;
 
 pub type Atom<T> = fn(AtomBuilder) -> T;
+pub type AtomRef<T> = fn(AtomBuilder) -> T;
 pub type AtomFamily<K, V> = fn(AtomFamilyBuilder) -> ImMap<K, V>;
 
 pub struct AtomBuilder;
