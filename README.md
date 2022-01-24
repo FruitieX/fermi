@@ -1,4 +1,12 @@
-# Fermi: An atom-based global state management solution for Dioxus
+
+<div align="center">
+  <h1>Fermi ⚛</h1>
+  <p>
+    <strong>Atom-based global state management solution for Dioxus</strong>
+  </p>
+</div>
+
+-----
 
 Fermi is a global state management solution for Dioxus that's as easy as `use_state`.
 
