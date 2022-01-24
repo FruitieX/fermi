@@ -12,6 +12,7 @@ impl<K, V> Readable<ImMap<K, V>> for AtomFamily<K, V> {
     fn init(&self) -> ImMap<K, V> {
         (*self)(AtomFamilyBuilder)
     }
+
     fn unique_id(&self) -> AtomId {
         *self as *const ()
     }

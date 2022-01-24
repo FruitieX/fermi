@@ -1,35 +1,39 @@
-# Fermi: A global state management solution for Dioxus, inspired by [Recoil.Js](http://recoiljs.org)
+# Fermi: An atom-based global state management solution for Dioxus
 
+Fermi is a global state management solution for Dioxus that's as easy as `use_state`.
 
-Fermi provides primitives for managing global state in Dioxus applications. Heavily inspired by Recoil.Js, Fermi uses the concepts of `atoms` and `selectors` to easily refactor local state into global state.
+Inspired by atom-based state management solutions, all state in Fermi starts as an `atom`:
 
 ```rust
+static NAME: Atom<String> = |_| "Dioxus".to_string();
+```
 
-// First, we define an atom of our global state
-static Name: Atom<String> = |_| "Dioxus".to_string();
+From anywhere in our app, we can read our the value of our atom:
 
-fn app(cx: Scope) -> Element {      
-    // then we can read it
-    let name = use_read(&cx, Name);
-
-    cx.render(rsx!{
-        h1 { "Hello, {name}"}
-    })
+```rust
+fn NameCard(cx: Scope) -> Element {      
+    let name = use_read(&cx, NAME);
+    cx.render(rsx!{ h1 { "Hello, {name}"} })
 }
+```
 
-fn Child(cx: Scope) -> Element {
-    // and then we can read or write it from anywhere in our app
-    let set_name = use_set(&cx, Name);
+We can also set the value of our atom, also from anywhere in our app:
 
+```rust
+fn NameCard(cx: Scope) -> Element {      
+    let set_name = use_set(&cx, NAME);
     cx.render(rsx!{
-        button { 
-            onclick: move |_| set_name(random_name()),
-            "Click to set a random name"
+        button {
+            onclick: move |_| set_name("Fermi".to_string()),
+            "Set name to fermi"
         }
     })
 }
 ```
 
+It's that simple!
+
+## Installation
 Fermi is currently under construction, so you have to use the `master` branch to get started.
 
 ```rust
@@ -38,8 +42,18 @@ fermi = { git = "https://github.com/dioxuslabs/fermi" }
 ```
 
 
+## Running examples
+
+The examples here use Dioxus Desktop to showcase their functionality. To run an example, use
+```
+$ cargo run --example EXAMPLE
+```
+
+## Features
+
 Broadly our feature set to required to be released includes:
 - [x] Support for Atoms
+- [x] Support for AtomRef (for values that aren't clone)
 - [ ] Support for Atom Families
 - [ ] Support for memoized Selectors
 - [ ] Support for memoized SelectorFamilies
