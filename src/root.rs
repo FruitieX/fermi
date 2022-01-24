@@ -56,9 +56,9 @@ impl AtomRoot {
             slot.value = Rc::new(value);
             log::trace!("found item with subscribers {:?}", slot.subscribers);
 
-            for sub in &slot.subscribers {
+            for scope in &slot.subscribers {
                 log::trace!("updating subcsriber");
-                (self.update_any)(*sub);
+                (self.update_any)(*scope);
             }
         } else {
             log::trace!("no atoms found for {:?}", ptr);
@@ -70,6 +70,16 @@ impl AtomRoot {
 
         if let Some(slot) = atoms.get_mut(&ptr) {
             slot.subscribers.remove(&scope);
+        }
+    }
+
+    // force update of all subscribers
+    pub fn force_update(&self, ptr: AtomId) {
+        if let Some(slot) = self.atoms.borrow_mut().get(&ptr) {
+            for scope in slot.subscribers.iter() {
+                log::trace!("updating subcsriber");
+                (self.update_any)(*scope);
+            }
         }
     }
 
