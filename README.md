@@ -6,6 +6,30 @@
   </p>
 </div>
 
+
+<div align="center">
+  <!-- Crates version -->
+  <a href="https://crates.io/crates/dioxus">
+    <img src="https://img.shields.io/crates/v/dioxus.svg?style=flat-square"
+    alt="Crates.io version" />
+  </a>
+  <!-- Downloads -->
+  <a href="https://crates.io/crates/dioxus">
+    <img src="https://img.shields.io/crates/d/dioxus.svg?style=flat-square"
+      alt="Download" />
+  </a>
+  <!-- docs -->
+  <a href="https://docs.rs/dioxus">
+    <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
+      alt="docs.rs docs" />
+  </a>
+  <!-- CI -->
+  <a href="https://github.com/jkelleyrtp/dioxus/actions">
+    <img src="https://github.com/dioxuslabs/dioxus/actions/workflows/main.yml/badge.svg"
+      alt="CI status" />
+  </a>
+</div>
+
 -----
 
 Fermi is a global state management solution for Dioxus that's as easy as `use_state`.
