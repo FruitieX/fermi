@@ -37,7 +37,7 @@ Fermi is a global state management solution for Dioxus that's as easy as `use_st
 Inspired by atom-based state management solutions, all state in Fermi starts as an `atom`:
 
 ```rust
-static NAME: Atom<String> = |_| "Dioxus".to_string();
+static NAME: Atom<&str> = |_| "Dioxus";
 ```
 
 From anywhere in our app, we can read our the value of our atom:
@@ -56,7 +56,7 @@ fn NameCard(cx: Scope) -> Element {
     let set_name = use_set(&cx, NAME);
     cx.render(rsx!{
         button {
-            onclick: move |_| set_name("Fermi".to_string()),
+            onclick: move |_| set_name("Fermi"),
             "Set name to fermi"
         }
     })

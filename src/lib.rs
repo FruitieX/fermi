@@ -1,14 +1,14 @@
+#![doc = include_str!("../README.md")]
+
 pub mod prelude {
     pub use crate::*;
 }
 
 mod root;
-mod selector;
 
 pub use atoms::*;
 pub use hooks::*;
 pub use root::*;
-pub use selector::*;
 
 mod atoms {
     mod atom;
@@ -37,12 +37,20 @@ pub mod hooks {
     pub use set::*;
 }
 
+/// All Atoms are `Readable` - they support reading their value.
+///
+/// This trait lets Dioxus abstract over Atoms, AtomFamilies, AtomRefs, and Selectors.
+/// It is not very useful for your own code, but could be used to build new Atom primitives.
 pub trait Readable<V> {
     fn read(&self, root: AtomRoot) -> Option<V>;
     fn init(&self) -> V;
     fn unique_id(&self) -> AtomId;
 }
 
+/// All Atoms are `Writable` - they support writing their value.
+///
+/// This trait lets Dioxus abstract over Atoms, AtomFamilies, AtomRefs, and Selectors.
+/// This trait lets Dioxus abstract over Atoms, AtomFamilies, AtomRefs, and Selectors
 pub trait Writable<V>: Readable<V> {
     fn write(&self, root: AtomRoot, value: V);
 }
