@@ -15,6 +15,7 @@ log = "0.4.14"
 
 
 [dev-dependencies]
+closure = "0.3.0"
 dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", features = [
     "desktop",
 ] }

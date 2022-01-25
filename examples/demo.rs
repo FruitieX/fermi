@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 use dioxus::prelude::*;
 use fermi::prelude::*;
 
@@ -12,11 +14,11 @@ fn app(cx: Scope) -> Element {
 
     cx.render(rsx! {
         div { "hello {name}!" }
-        child()
+        Child {}
     })
 }
 
-fn child(cx: Scope) -> Element {
+fn Child(cx: Scope) -> Element {
     let set_name = use_set(&cx, NAME);
 
     cx.render(rsx! {
